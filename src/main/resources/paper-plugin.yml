@@ -1,0 +1,4 @@
+name: statera
+version: '1.0-SNAPSHOT'
+main: org.statera.Statera
+api-version: '1.21'
