@@ -54,7 +54,11 @@ public class PrepareAnvilListener implements Listener {
             if (repairCost >= 40) {
                 inventory.setRepairCost(39);
             }
-            if(inventory.getFirstItem().getType() == Material.ELYTRA && inventory.getSecondItem().getType() == Material.PHANTOM_MEMBRANE){
+
+            if(inventory.getFirstItem() != null &&
+                    inventory.getSecondItem() != null &&
+                    inventory.getFirstItem().getType() == Material.ELYTRA &&
+                    inventory.getSecondItem().getType() == Material.PHANTOM_MEMBRANE){
                 inventory.setRepairCost(0);
             }
         }
