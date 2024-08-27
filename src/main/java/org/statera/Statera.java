@@ -1,26 +1,20 @@
 package org.statera;
 
-import io.papermc.paper.command.brigadier.Commands;
-import io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager;
-import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.statera.commands.RecallCommand;
 import org.statera.listener.AutomaticFarmListener;
 import org.statera.listener.MinecartListener;
 import org.statera.listener.PrepareAnvilListener;
 import org.statera.listener.VillagerTradeListener;
 import org.statera.packet.AnvilPacketHandler;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class Statera extends JavaPlugin {
 
-    private AnvilPacketHandler anvilPacketHandler;
     Logger logger;
+    private AnvilPacketHandler anvilPacketHandler;
 
     @Override
     public void onEnable() {
@@ -51,7 +45,6 @@ public final class Statera extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new AutomaticFarmListener(), this);
         Bukkit.getPluginManager().registerEvents(new MinecartListener(), this);
     }
-
 
 
 }
