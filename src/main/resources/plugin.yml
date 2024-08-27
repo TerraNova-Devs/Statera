@@ -2,4 +2,11 @@ name: statera
 version: '1.0-SNAPSHOT'
 main: org.statera.Statera
 api-version: '1.21'
+authors: [Basti, gerryxn]
+prefix: TerraNova
+website: mcterranova.de
+description: Balancing Plugin tailored & written by & for TerraNova.
+commands:
+  recall:
+    description: Recalls your minecart so you will be able to place it somewhere else.
 depend: [ProtocolLib]
