@@ -19,7 +19,7 @@ import java.util.List;
 public class AutomaticFarmListener implements Listener {
 
     //Denies Mob-drops from automated killing methods
-    private final List<DamageType> deniedDamageTypes = new ArrayList<>(Arrays.asList(DamageType.LAVA, DamageType.DROWN, DamageType.CACTUS, DamageType.CRAMMING, DamageType.FALL));
+    private final List<DamageType> deniedDamageTypes = new ArrayList<>(Arrays.asList(DamageType.LAVA, DamageType.DROWN, DamageType.CACTUS, DamageType.CRAMMING, DamageType.FALL, DamageType.CAMPFIRE));
     //If water is being used to harvest fields
     private final List<Material> deniedPlants = new ArrayList<>(Arrays.asList(Material.WHEAT, Material.CARROT, Material.BEETROOT, Material.POTATO, Material.BAMBOO, Material.SUGAR_CANE, Material.CACTUS));
 
