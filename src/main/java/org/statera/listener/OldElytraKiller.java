@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.statera.utils.Chat;
 
 import java.util.Arrays;
@@ -29,11 +31,19 @@ public class OldElytraKiller implements Listener {
                 .forEach(stack -> {
                     World w = p.getWorld();
                     w.createExplosion(p.getLocation(),10f,false,false);
+                    int enchant = armor[2].getEnchantmentLevel(Enchantment.UNBREAKING);
                     ItemStack elytra = new ItemStack(Material.ELYTRA);
                     elytra.addEnchantment(Enchantment.MENDING, 1);
                     armor[2] = elytra;
                     p.getInventory().setArmorContents(armor);
                     p.sendMessage(Chat.errorFade("Jo digga deine Elytra ist nun legalisiert. Hau rein!"));
+
+                    ItemStack unbreaking = new ItemStack(Material.ENCHANTED_BOOK);
+                    EnchantmentStorageMeta meta = (EnchantmentStorageMeta)unbreaking.getItemMeta();
+                    meta.addStoredEnchant(Enchantment.UNBREAKING, enchant, true);
+                    unbreaking.setItemMeta(meta);
+                    w.dropItem(p.getLocation(), unbreaking);
+
                 });
     }
 
