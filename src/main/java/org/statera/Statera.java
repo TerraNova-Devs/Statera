@@ -2,10 +2,7 @@ package org.statera;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.statera.listener.AutomaticFarmListener;
-import org.statera.listener.MinecartListener;
-import org.statera.listener.PrepareAnvilListener;
-import org.statera.listener.VillagerTradeListener;
+import org.statera.listener.*;
 import org.statera.packet.AnvilPacketHandler;
 
 import java.util.logging.Level;
@@ -44,6 +41,7 @@ public final class Statera extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PrepareAnvilListener(), this);
         Bukkit.getPluginManager().registerEvents(new AutomaticFarmListener(), this);
         Bukkit.getPluginManager().registerEvents(new MinecartListener(), this);
+        Bukkit.getPluginManager().registerEvents(new OldElytraKiller(), this);
     }
 
 
