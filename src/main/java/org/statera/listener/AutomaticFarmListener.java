@@ -21,7 +21,7 @@ public class AutomaticFarmListener implements Listener {
     //Denies Mob-drops from automated killing methods
     private final List<DamageType> deniedDamageTypes = new ArrayList<>(Arrays.asList(DamageType.LAVA, DamageType.DROWN, DamageType.CACTUS, DamageType.CRAMMING, DamageType.FALL, DamageType.CAMPFIRE));
     //If water is being used to harvest fields
-    private final List<Material> deniedPlants = new ArrayList<>(Arrays.asList(Material.WHEAT, Material.CARROT, Material.BEETROOT, Material.POTATO, Material.BAMBOO, Material.SUGAR_CANE, Material.CACTUS));
+    private final List<Material> deniedPlants = new ArrayList<>(Arrays.asList(Material.BAMBOO, Material.SUGAR_CANE, Material.CACTUS));
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent e) {
@@ -51,11 +51,6 @@ public class AutomaticFarmListener implements Listener {
 
     @EventHandler
     public void onPistonExtend(BlockPistonExtendEvent e) {
-        //Prevents a Piston from extending when there is no Block attached
-        if (e.getBlocks().isEmpty()) {
-            e.setCancelled(true);
-            return;
-        }
 
         // Denies if a block is pushed next to a cactus
         Location pistonDirection = e.getBlocks().getFirst().getLocation().subtract(e.getBlock().getLocation());
