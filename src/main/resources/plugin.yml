@@ -1,7 +1,7 @@
 name: statera
 version: '1.0-SNAPSHOT'
 main: org.statera.Statera
-api-version: '1.21'
+api-version: '1.21.4'
 authors: [Basti, gerryxn]
 prefix: TerraNova
 website: mcterranova.de
