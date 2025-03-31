@@ -51,13 +51,14 @@ public class AutomaticFarmListener implements Listener {
 
     @EventHandler
     public void onPistonExtend(BlockPistonExtendEvent e) {
+        if (e.getBlocks().isEmpty()) return;
 
         // Denies if a block is pushed next to a cactus
         Location pistonDirection = e.getBlocks().getFirst().getLocation().subtract(e.getBlock().getLocation());
         Block block = e.getBlocks().getLast().getLocation().add(pistonDirection).getBlock();
         if (block.getLocation().add(pistonDirection).getBlock().getType().equals(Material.CACTUS)) e.setCancelled(true);
 
-        //Denies if a Piston is used to harvest something
+        // Denies if a Piston is used to harvest something
         if (deniedPlants.contains(e.getBlocks().getLast().getType())) e.setCancelled(true);
     }
 
