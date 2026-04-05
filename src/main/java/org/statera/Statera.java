@@ -3,7 +3,6 @@ package org.statera;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.statera.listener.*;
-import org.statera.packet.AnvilPacketHandler;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,7 +10,6 @@ import java.util.logging.Logger;
 public final class Statera extends JavaPlugin {
 
     Logger logger;
-    private AnvilPacketHandler anvilPacketHandler;
 
     @Override
     public void onEnable() {
@@ -24,15 +22,11 @@ public final class Statera extends JavaPlugin {
             return;
         }
         listenerRegistry();
-        anvilPacketHandler = new AnvilPacketHandler(this);
         logger.log(Level.INFO, "Statera is enabled");
     }
 
     @Override
     public void onDisable() {
-        if (anvilPacketHandler != null) {
-            anvilPacketHandler.unregister();
-        }
         getLogger().info("Statera plugin disabled!");
     }
 
@@ -42,6 +36,7 @@ public final class Statera extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new AutomaticFarmListener(), this);
         Bukkit.getPluginManager().registerEvents(new MinecartListener(), this);
         Bukkit.getPluginManager().registerEvents(new OldElytraKiller(), this);
+        getServer().getPluginManager().registerEvents(new AnvilCostListener(), this);
     }
 
 
