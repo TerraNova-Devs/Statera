@@ -9,4 +9,3 @@ description: Balancing Plugin tailored & written by & for TerraNova.
 commands:
   recall:
     description: Recalls your minecart so you will be able to place it somewhere else.
-depend: [ProtocolLib]
