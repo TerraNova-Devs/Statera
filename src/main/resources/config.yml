@@ -1,0 +1,6 @@
+# {player} = Name des Spielers
+merchant-command: "tempban {player} 3d Unzulaessiger Handel (automatisch)"
+# Leer = keine Meldung
+merchant-webhook: ""
+# Mindestabstand zwischen zwei Craftvorgaengen eines Crafters in Ticks (20 = 1 s, Vanilla 4)
+crafter-cooldown-ticks: 20
