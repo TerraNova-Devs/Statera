@@ -20,25 +20,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-// Each Mending book bought at an old price is counted (player data, HuskSync carries it between servers) and reported.
-// The third one strips Mending from the inventory, blows up the villager and runs merchant-command; the count starts over.
+// Each Mending book bought at an old price is counted (player data, HuskSync carries it between servers) and logged.
+// The second one strips Mending from the inventory, blows up and removes the villager and runs merchant-command.
 public class MerchantCheckListener implements Listener {
 
-    private static final int LIMIT = 3;
+    private static final int LIMIT = 2;
 
     private final JavaPlugin plugin;
     private final NamespacedKey key;
     private final Set<UUID> pending = new HashSet<>();
-    private final HttpClient http = HttpClient.newHttpClient();
 
     public MerchantCheckListener(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -63,13 +58,13 @@ public class MerchantCheckListener implements Listener {
 
         if (count < LIMIT) {
             player.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, count);
-            report(text);
+            plugin.getLogger().warning(text);
             return;
         }
 
         player.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 0);
         pending.add(player.getUniqueId());
-        report(text + ", Mending entfernt, Strafe: " + plugin.getConfig().getString("merchant-command", ""));
+        plugin.getLogger().warning(text + ", Mending entfernt, Strafe: " + plugin.getConfig().getString("merchant-command", ""));
         // A tick later the bought book has landed in the inventory or on the cursor
         Bukkit.getScheduler().runTask(plugin, () -> {
             pending.remove(player.getUniqueId());
@@ -80,7 +75,7 @@ public class MerchantCheckListener implements Listener {
             }
             if (villager.isValid()) {
                 villager.getWorld().createExplosion(villager.getLocation(), 2f, false, false, villager);
-                villager.setHealth(0);
+                villager.remove();
             }
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                     plugin.getConfig().getString("merchant-command", "").replace("{player}", player.getName()));
@@ -116,21 +111,5 @@ public class MerchantCheckListener implements Listener {
         }
         item.setItemMeta(meta);
         return item;
-    }
-
-    private void report(String text) {
-        plugin.getLogger().warning(text);
-        String url = plugin.getConfig().getString("merchant-webhook", "");
-        if (url.isBlank()) return;
-        String json = "{\"content\":\"" + text.replace("\\", "\\\\").replace("\"", "\\\"") + "\"}";
-        HttpRequest request = HttpRequest.newBuilder(URI.create(url))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(json))
-                .build();
-        http.sendAsync(request, HttpResponse.BodyHandlers.discarding())
-                .exceptionally(e -> {
-                    plugin.getLogger().warning("Webhook: " + e.getMessage());
-                    return null;
-                });
     }
 }
