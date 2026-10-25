@@ -1,7 +1,7 @@
 name: statera
-version: '1.0-SNAPSHOT'
+version: '1.1-SNAPSHOT'
 main: org.statera.Statera
-api-version: '1.21'
+api-version: '26.3'
 authors: [Basti, gerryxn]
 prefix: TerraNova
 website: mcterranova.de
@@ -9,3 +9,6 @@ description: Balancing Plugin tailored & written by & for TerraNova.
 commands:
   recall:
     description: Recalls your minecart so you will be able to place it somewhere else.
+permissions:
+  statera.merchant.bypass:
+    default: false

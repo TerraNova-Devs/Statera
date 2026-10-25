@@ -33,7 +33,7 @@ public class VillagerTradeListener implements Listener {
                     Enchantment enchantment = entry.getKey();
                     int level = entry.getValue();
 
-                    if (enchantment == Enchantment.MENDING) {
+                    if (enchantment.getKey().equals(Enchantment.MENDING.getKey())) {
                         isMending = true;
                     }
 

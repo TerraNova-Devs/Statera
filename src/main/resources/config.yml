@@ -1,0 +1,4 @@
+# {player} = Name des Spielers
+merchant-command: "ban {player} Unzulaessiger Handel (automatisch)"
+# Leer = keine Meldung
+merchant-webhook: ""

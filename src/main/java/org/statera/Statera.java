@@ -15,12 +15,7 @@ public final class Statera extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         logger = getLogger();
-
-        if (getServer().getPluginManager().getPlugin("ProtocolLib") == null) {
-            getLogger().severe("ProtocolLib is required to run this plugin.");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
+        saveDefaultConfig();
         listenerRegistry();
         logger.log(Level.INFO, "Statera is enabled");
     }
@@ -37,6 +32,7 @@ public final class Statera extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new MinecartListener(), this);
         Bukkit.getPluginManager().registerEvents(new OldElytraKiller(), this);
         getServer().getPluginManager().registerEvents(new AnvilCostListener(), this);
+        getServer().getPluginManager().registerEvents(new MerchantCheckListener(this), this);
     }
 
 
