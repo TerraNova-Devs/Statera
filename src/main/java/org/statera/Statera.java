@@ -33,7 +33,6 @@ public final class Statera extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new OldElytraKiller(), this);
         getServer().getPluginManager().registerEvents(new AnvilCostListener(), this);
         getServer().getPluginManager().registerEvents(new MerchantCheckListener(this), this);
-        getServer().getPluginManager().registerEvents(new CrafterCooldownListener(this), this);
     }
 
 

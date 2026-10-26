@@ -1,4 +1,2 @@
 # {player} = Name des Spielers
 merchant-command: "ban {player} Unzulaessiger Handel (automatisch)"
-# Mindestabstand zwischen zwei Craftvorgaengen eines Crafters in Ticks (20 = 1 s, Vanilla 4)
-crafter-cooldown-ticks: 20
